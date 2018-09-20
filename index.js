@@ -19,15 +19,9 @@ class Driver {
   }
 
   passengers() {
-    return store.passengers.filter(
-      function(passenger) {
-        return passenger.trips().filter(
-          function(trip) {
-            return trip.driverId === this.id
-          }.bind(this)
-        );
-      }.bind(this)
-    );
+    return this.trips().map(function(trip) {
+      return trip.passenger();
+    })
   }
 
 
@@ -52,15 +46,9 @@ class Passenger {
   }
 
   drivers() {
-    return store.drivers.filter(
-      function(driver) {
-        return driver.trips().filter(
-          function(trip) {
-            return trip.passengerId === this.id
-          }.bind(this)
-        );
-      }.bind(this)
-    );
+    return this.trips().map(function(trip) {
+      return trip.driver();
+    })
   }
 }
 
